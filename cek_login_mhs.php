@@ -17,7 +17,8 @@ if(isset($_POST['login'])){
         $_SESSION['username'] = $data['username'];
         $_SESSION['password'] = $data['password'];
         $_SESSION['level'] = $data['level'];
-
+        $_SESSION['nama'] = $data['nama'];
+        
         // var_dump($_SESSION['level']);
         
             header("location:menu_mahasiswa.php");

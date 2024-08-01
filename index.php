@@ -115,8 +115,7 @@
 <div class="container-fluid text-center">
 	<br><br><br><br>
 	<h2>Halaman Utama Peminjaman Ruangan</h2><br>
-	<h3>Poltekkes Kemenkes Bengkulu</h3>
-    <h3>Poltekkes Kemenkes Bengkulu</h3><br><br>
+	<h3>Poltekkes Kemenkes Bengkulu</h3><br><br>
 
   <a href="./user_jadwal.php" class="btn btn-lg"><span class="glyphicon glyphicon-calendar"></span><br>Kalender</a>
   <!-- <a href="./user_detail.php" class="btn btn-lg"><span class="glyphicon glyphicon-tower"></span><br>Lihat Peminjaman</a> -->

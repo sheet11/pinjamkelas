@@ -16,6 +16,11 @@
   <link href="./style.css" type="text/css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
   <style>
     
   </style>
@@ -55,8 +60,7 @@
 <div class="container-fluid text-center">
 	<br><br><br><br>
 	<h2>Menu Mahasiswa Peminjaman Kelas</h2><br>
-	<h3>Poltekkes Kemenkes Bengkulu</h3>
-  <h3>Poltekkes Kemenkes Bengkulu</h3><br><br>
+	<h3>Poltekkes Kemenkes Bengkulu</h3><br><br>
 
   <a href="user_peminjaman_ruangan.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-tower"></span><br>Peminjaman</a>
   <a href="./mahasiswa_pengajuan.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-folder-open"></span><br>Pengajuan</a>
