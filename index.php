@@ -85,10 +85,6 @@
   </style>
 </head>
 
-
-
-
-
 <body>
 <nav class="navbar">
   <div class="container-fluid">
@@ -100,7 +96,7 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav na">
         <li class="active"><a href="index.php">Menu Utama</a></li>
         <li><a href="about.php">About</a></li>
         <li><a href="kontak.php">Contact</a></li>
