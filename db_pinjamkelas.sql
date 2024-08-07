@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2024 at 11:53 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Aug 08, 2024 at 01:52 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `dosen` (
   `id_dosen` int(11) NOT NULL,
   `nama_dosen` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dosen`
@@ -53,20 +53,20 @@ CREATE TABLE `meminjam` (
   `matkul` varchar(255) NOT NULL,
   `dosen` varchar(50) NOT NULL,
   `tgl_pinjam` varchar(50) NOT NULL,
-  `start_date` varchar(50) NOT NULL,
-  `end_date` varchar(50) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
   `jumlah_mahasiswa` varchar(100) NOT NULL,
   `status` varchar(15) NOT NULL,
   `keterangan` text NOT NULL,
   `color` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `meminjam`
 --
 
 INSERT INTO `meminjam` (`kode_pinjam`, `nama_peminjam`, `nama_ruang`, `matkul`, `dosen`, `tgl_pinjam`, `start_date`, `end_date`, `jumlah_mahasiswa`, `status`, `keterangan`, `color`) VALUES
-(13, 'TK1 - Kelas A', '', 'asd', 'asd', '01-08-2024 15:08', '2024-08-01T15:14', '2024-08-01T16:14', '123', 'Diajukan', '', '#28a745');
+(13, 'TK1 - Kelas A', '', 'asd', 'asd', '01-08-2024 15:08', '2024-08-01 15:14:00', '2024-08-01 16:14:00', '123', 'Batal', '', '#000');
 
 -- --------------------------------------------------------
 
@@ -79,43 +79,26 @@ CREATE TABLE `ruangan` (
   `nama_ruang` varchar(50) NOT NULL,
   `gedung` varchar(50) NOT NULL,
   `lantai` varchar(5) NOT NULL,
-  `fasilitas1` varchar(255) NOT NULL,
-  `fasilitas2` varchar(255) NOT NULL,
-  `fasilitas3` varchar(255) NOT NULL,
-  `fasilitas4` varchar(255) NOT NULL,
   `status` varchar(15) NOT NULL,
-  `koor_ruang` varchar(50) NOT NULL,
-  `id_user` int(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status_pinjam` enum('Kosong','Sedang di pinjam') NOT NULL DEFAULT 'Kosong'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `ruangan`
 --
 
-INSERT INTO `ruangan` (`id_ruang`, `nama_ruang`, `gedung`, `lantai`, `fasilitas1`, `fasilitas2`, `fasilitas3`, `fasilitas4`, `status`, `koor_ruang`, `id_user`) VALUES
-(101, 'Lab Komputer', 'Ibnu An Nafis - Bengkulu', '5', '140', '140', 'Ada', 'kamar mandi dalam', '', '-', 1),
-(102, 'Ruang Teater', 'An Nafis', '5', '2', '84', 'Tersedia', '-', '', '-', 1),
-(103, 'Auditorium', 'Auditorium', '1', '1000', '1000', '2', '-', '', '-', 1),
-(104, 'Lab Osca', 'Ibnu An Nafis', '5', '10', '30', '1', '-', '', '-', 1),
-(105, 'Unit Pengembangan Bahasa', 'Unit Pengembangan Bahasa', '2', 'Komputer 40', 'Kursi 40', 'Sound System', 'AC', 'Tersedia', '-', 1),
-(106, 'R. KULIAH II.2', 'Ibnu An Nafis', '2', '50', '50', '-', '-', '', '-', 1),
-(107, 'R. KULIAH II.3', 'Ibnu An Nafis', '2', '50', '50', '-', '-', '', '-', 1),
-(108, 'R. KULIAH 5', 'A', '4', '-', '-', '-', '-', '-', '-', 1),
-(109, 'R. KULIAH 7', 'A', '4', '-', '-', '-', '-', '-', '-', 1),
-(110, 'R. KULIAH 8', 'A ', '4', '-', '-', '-', '-', '-', '-', 1),
-(111, 'R. KULIAH 9', 'A', '4', '-', '-', '-', '-', '-', '-', 1),
-(112, 'R. SEMINAR 3', 'A', '5', '-', '-', '-', '-', '-', '-', 1),
-(113, 'R. KULIAH 13', 'A', '5', '-', '-', '-', '-', '-', '-', 1),
-(114, 'R. KULIAH 14', 'A', '5', '-', '-', '-', '-', '-', '-', 1),
-(115, 'AULA', 'A', '6', '-', '-', '-', '-', '-', '-', 1),
-(116, 'B.201 (R. KONFERENSI) ', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(117, 'B.202 (R. TRANSIT, R. RAPAT)', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(118, 'B.203 (R. UJIAN DOKTOR)', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(119, 'B.204', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(120, 'B.205 (R. DOSEN 4)', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(121, 'B.206 (R. DOSEN 3)', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(122, 'B.207 (R. DOSEN 2)', 'B', '2', '-', '-', '-', '-', '-', '-', 1),
-(123, 'B.208 (R. DOSEN 1)', 'B', '2', '-', '-', '-', '-', '-', '-', 1);
+INSERT INTO `ruangan` (`id_ruang`, `nama_ruang`, `gedung`, `lantai`, `status`, `status_pinjam`) VALUES
+(124, 'Kelas II.1', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(125, 'Kelas II.2', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(126, 'Kelas II.3', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(127, 'Kelas II.4', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(128, 'Kelas II.5', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(129, 'Kelas II.6', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(130, 'Kelas II.7', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(131, 'Kelas II.8', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(132, 'Kelas II.9', 'Ibnu An-Nafiz', '2', '', 'Kosong'),
+(133, 'Kelas III.9', 'Ibnu An-Nafiz', '3', '', 'Kosong'),
+(134, 'Kelas III.8', 'Ibnu An-Nafiz', '3', '', 'Sedang di pinjam');
 
 -- --------------------------------------------------------
 
@@ -130,7 +113,7 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `level` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
@@ -162,8 +145,7 @@ ALTER TABLE `meminjam`
 -- Indexes for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  ADD PRIMARY KEY (`id_ruang`),
-  ADD KEY `id_admin` (`id_user`);
+  ADD PRIMARY KEY (`id_ruang`);
 
 --
 -- Indexes for table `user`
@@ -191,23 +173,13 @@ ALTER TABLE `meminjam`
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `id_ruang` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id_ruang` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `ruangan`
---
-ALTER TABLE `ruangan`
-  ADD CONSTRAINT `ruangan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
