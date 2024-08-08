@@ -6,24 +6,26 @@ if ($_POST['rowid']) {
     $id = $_POST['rowid'];
 
     // mengambil data berdasarkan id
-    $sql = "SELECT * FROM ruangan WHERE id_ruang = $id";
+    $sql = "SELECT * FROM meminjam WHERE kode_pinjam = $id";
     $result = $koneksi->query($sql);
     foreach ($result as $baris) { ?>
-        <form action="admin_edit_aksi.php" method="post">
+        <form action="admin_edit_modal_aksi.php" method="post">
             <div class="form-group">
                 <label for="ruangan">Nama Ruang: </label>
                 <input type="text" class="form-control" id="nama_ruang" name="nama_ruang" value="<?php echo $baris['nama_ruang']; ?>" required>
-                <input type="hidden" id="id_ruang" name="id_ruang" value="<?php echo $baris['id_ruang']; ?>">
+                <input type="hidden" id="kode_pinjam" name="kode_pinjam" value="<?php echo $baris['kode_pinjam']; ?>">
             </div>
 
             <div class="form-group">
-                <label for="ruangan">Gedung: </label>
-                <input type="text" class="form-control" id="gedung" name="gedung" value="<?php echo $baris['gedung']; ?>" required>
-            </div>
-
-            <div class="form-group">
-                <label for="ruangan">Lantai: </label>
-                <input type="text" class="form-control" id="lantai" name="lantai" value="<?php echo $baris['lantai']; ?>" required>
+                <label>Nama Ruangan</label>
+                <select name="ruang" class="form-control">
+                    <option value="">----PILIH----</option>
+                    <?php
+                    $data_ruang = mysqli_query($koneksi, "SELECT * FROM ruangan");
+                    while ($ruang = mysqli_fetch_array($data_ruang)) { ?>
+                        <option value="<?= $ruang['nama_ruang']; ?>"><?= $ruang['nama_ruang']; ?>, status = <?php echo $ruang['status_pinjam']; ?> </option>
+                    <?php } ?>
+                </select>
             </div>
 
             <!--<div class="form-group">

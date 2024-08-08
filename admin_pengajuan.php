@@ -23,6 +23,73 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+  <script>
+    (function($, window) {
+      'use strict';
+
+      var MultiModal = function(element) {
+        this.$element = $(element);
+        this.modalCount = 0;
+      };
+
+      MultiModal.BASE_ZINDEX = 1040;
+
+      MultiModal.prototype.show = function(target) {
+        var that = this;
+        var $target = $(target);
+        var modalIndex = that.modalCount++;
+
+        $target.css('z-index', MultiModal.BASE_ZINDEX + (modalIndex * 20) + 10);
+
+        window.setTimeout(function() {
+
+          if (modalIndex > 0)
+            $('.modal-backdrop').not(':first').addClass('hidden');
+
+          that.adjustBackdrop();
+        });
+      };
+
+      MultiModal.prototype.hidden = function(target) {
+        this.modalCount--;
+
+        if (this.modalCount) {
+          this.adjustBackdrop();
+
+          $('body').addClass('modal-open');
+        }
+      };
+
+      MultiModal.prototype.adjustBackdrop = function() {
+        var modalIndex = this.modalCount - 1;
+        $('.modal-backdrop:first').css('z-index', MultiModal.BASE_ZINDEX + (modalIndex * 20));
+      };
+
+      function Plugin(method, target) {
+        return this.each(function() {
+          var $this = $(this);
+          var data = $this.data('multi-modal-plugin');
+
+          if (!data)
+            $this.data('multi-modal-plugin', (data = new MultiModal(this)));
+
+          if (method)
+            data[method](target);
+        });
+      }
+
+      $.fn.multiModal = Plugin;
+      $.fn.multiModal.Constructor = MultiModal;
+
+      $(document).on('show.bs.modal', function(e) {
+        $(document).multiModal('show', e.target);
+      });
+
+      $(document).on('hidden.bs.modal', function(e) {
+        $(document).multiModal('hidden', e.target);
+      });
+    }(jQuery, window));
+  </script>
 
 </head>
 
@@ -173,6 +240,45 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <div class="col-md-3"></div>
     </div>
   </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Ruangan</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="fetched-data"></div>
+        </div>
+        <div class="modal-footer modalfoot">
+          <button type="button" class="btn btndec container2" data-dismiss="modal">Keluar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#myModal').on('show.bs.modal', function(e) {
+        var rowid = $(e.relatedTarget).data('id');
+        //menggunakan fungsi ajax untuk pengambilan data
+        $.ajax({
+          type: 'post',
+          url: 'admin_edit_modal.php',
+          data: 'rowid=' + rowid,
+          success: function(data) {
+            $('.fetched-data').html(data); //menampilkan data ke dalam modal
+          }
+        });
+      });
+    });
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 
 </html>
