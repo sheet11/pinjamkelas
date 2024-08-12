@@ -99,7 +99,7 @@ while ($a = mysqli_fetch_array($data)) {
   <div class="col-md-12 daftar">
     <div class="col-sm-3"></div>
     <div class="col-md-6 form">
-      <form method="post" action="admin_prosespinjam.php">
+      <form method="post" action="admin_proses_pilih_ruang.php">
         <input type="hidden" name="kode_pinjam" value="<?php echo $_GET['kode_pinjam']; ?>">
 
         <div class="form-group">
@@ -115,7 +115,7 @@ while ($a = mysqli_fetch_array($data)) {
 
         <div class="form-group">
           <label>Dosen</label>
-          <input type="text" class="form-control" placeholder="Masukkan Nama Dosen" value="<?php echo $dosen; ?>" name="dosen" required autocomplete="off">
+          <input type="text" class="form-control" placeholder="Masukkan Nama Dosen" value="<?php echo $dosen; ?>" name="kegiatan" required autocomplete="off">
         </div>
 
         <div class="form-group">
@@ -169,7 +169,7 @@ while ($a = mysqli_fetch_array($data)) {
         </div>
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Status Peminjaman</label>
           <div class='input-group'>
             <select class="form-control" name="status">
@@ -188,7 +188,7 @@ while ($a = mysqli_fetch_array($data)) {
                       } ?> value="Selesai">Selesai</option>
             </select>
           </div>
-        </div>
+        </div> -->
 
         <br>
 

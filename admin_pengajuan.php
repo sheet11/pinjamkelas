@@ -188,31 +188,39 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                   <td><?php echo $d['tgl_pinjam'] ?></td>
                   <td><?php echo $d['start_date'] ?></td>
                   <td><?php echo $d['end_date']; ?></td>
-                  <td><?php echo $d['status']; ?></td>
+                  <td><?php if ($d['status'] == 'Disetujui') {
+                        echo "<span class='badge hijau'>Disetujui</span>";
+                      } elseif ($d['status'] == 'Diajukan') {
+                        echo "<span class='badge kuning'>Diajukan</span>";
+                      } elseif ($d['status'] == 'Batal') {
+                        echo "<span class='badge merah'>Batal</span>";
+                      } else {
+                        echo "<span class='badge biru'>Selesai</span>";
+                      } ?></td>
                   <?php
                   if ($d['status'] == 'Diajukan') {
                   ?>
-                    <td><?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=1' class='btn btn-success btn-small'>Setujui</a>"; ?>
-                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-danger btn-small'>Batal</a>"; ?>
-                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Edit</a>"; ?>
+                    <td><?php echo "<a href='admin_pilih_ruang.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=1' class='btn btn-success btn-small'>Setujui</a>"; ?>
+                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-warning btn-small' style='color: black;'>Batal</a>"; ?>
+                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
                   } elseif ($d['status'] == 'Disetujui') {
                   ?>
                     <td><?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=2' class='btn btn-primary btn-small'>Selesaikan<br></a>"; ?>
-                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-danger btn-small'>Batalkan</a>"; ?>
-                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Edit</a>"; ?>
+                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-warning btn-small' style='color: black;'>Batalkan</a>"; ?>
+                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
                   } elseif ($d['status'] == 'Selesai') {
                   ?>
                     <td><?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?>
-                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Edit</a>"; ?></td>
+                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?></td>
                   <?php
                   } else {
                   ?>
-                    <td><?php echo "<a href='admin_edit_keterangan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Alasan Batal</a>"; ?>
-                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Edit</a>"; ?>
+                    <td><?php echo "<a href='admin_edit_keterangan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-warning btn-small' style='color: black;'>Alasan Batal</a>"; ?>
+                      <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
                   }
@@ -288,6 +296,26 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
     border-spacing: 5px;
     margin-top: 5px;
     padding-right: 24.5px;
+  }
+
+  .merah {
+    background-color: red;
+  }
+
+  .biru {
+    background-color: blue;
+  }
+
+  .kuning {
+    background-color: orange;
+  }
+
+  .hijau {
+    background-color: green;
+  }
+
+  .btn {
+    border-radius: 4px;
   }
 </style>
 
