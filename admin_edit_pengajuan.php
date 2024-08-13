@@ -180,9 +180,9 @@ while ($a = mysqli_fetch_array($data)) {
               <option <?php if ($status == 'Diajukan') {
                         echo 'selected';
                       } ?> value="Diajukan">Diajukan</option>
-              <option <?php if ($status == 'Batal') {
+              <option <?php if ($status == 'Tolak') {
                         echo 'selected';
-                      } ?> value="Batal">Batal</option>
+                      } ?> value="Batal">Tolak</option>
               <option <?php if ($status == 'Selesai') {
                         echo 'selected';
                       } ?> value="Selesai">Selesai</option>

@@ -10,14 +10,13 @@ if (isset($_POST['update'])) {
     $matkul = $_POST['matkul'];
     $ruang = $_POST['ruang'];
     $dosen = $_POST['dosen'];
-    $mulai = $_POST['mulai'];
-    $selesai = $_POST['selesai'];
     $status = 'Disetujui';
-    $jumlah = $_POST['jumlah'];
+    $status_pinjam = 'Sedang di pinjam';
 
     // $data = [$nama, $instansi, $ruang, $mulai, $selesai];
     // update user data
-    $result = mysqli_query($koneksi, "UPDATE meminjam SET nama_peminjam='$nama', matkul='$matkul', nama_ruang='$ruang', dosen='$dosen', start_date='$mulai', end_date='$selesai', status='$status', jumlah_mahasiswa='$jumlah' WHERE kode_pinjam='$kode'");
+    $result = mysqli_query($koneksi, "UPDATE meminjam SET nama_ruang='$ruang', status='$status' WHERE kode_pinjam='$kode'");
+    $result = mysqli_query($koneksi, "UPDATE ruangan SET status_pinjam='$status_pinjam' WHERE nama_ruang='$ruang'");
 
     // Redirect to homepage to display updated user in list
     // var_dump($data);

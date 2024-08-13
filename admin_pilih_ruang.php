@@ -142,7 +142,7 @@ while ($a = mysqli_fetch_array($data)) {
 
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Waktu Mulai Meminjam</label>
           <div class='input-group date' id='datetimepicker1'>
             <input type='text' placeholder="Tentukan Tanggal dan Jam Mulai Kegiatan" value="<?php echo $mulai; ?>" name="mulai" class="form-control" autocomplete="off" onkeydown="event.preventDefault()" />
@@ -166,7 +166,7 @@ while ($a = mysqli_fetch_array($data)) {
         <div class="form-group">
           <label>Jumlah Mahasiswa</label>
           <input type="text" class="form-control" placeholder="Masukkan Nama Instansi" value="<?php echo $jumlah; ?>" name="jumlah" required autocomplete="off">
-        </div>
+        </div> -->
 
 
         <!-- <div class="form-group">

@@ -129,14 +129,17 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
           case '1':
             $status = 'Disetujui';
             $color = '#FF0000';
+            $sp = 'Sedang di pinjam';
             break;
           case '2':
             $status = 'Selesai';
             $color = '#0000FF';
+            $sp = 'Tersedia';
             break;
           case '3':
             $status = 'Batal';
             $color = '#000';
+            $sp = 'Tersedia';
             break;
         }
 
@@ -178,6 +181,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
               include 'koneksi.php';
 
               $data = mysqli_query($koneksi, "select * from meminjam order by kode_pinjam desc");
+              $r = mysqli_query($koneksi, "select * from ruangan order by nama_ruang desc");
               while ($d = mysqli_fetch_array($data)) {
               ?>
                 <tr>
@@ -201,14 +205,14 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                   if ($d['status'] == 'Diajukan') {
                   ?>
                     <td><?php echo "<a href='admin_pilih_ruang.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=1' class='btn btn-success btn-small'>Setujui</a>"; ?>
-                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-warning btn-small' style='color: black;'>Batal</a>"; ?>
+                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-warning btn-small' style='color: black;'>Tolak</a>"; ?>
                       <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
                   } elseif ($d['status'] == 'Disetujui') {
                   ?>
                     <td><?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=2' class='btn btn-primary btn-small'>Selesaikan<br></a>"; ?>
-                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3' class='btn btn-warning btn-small' style='color: black;'>Batalkan</a>"; ?>
+                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3&nama_ruang=" . $d['kode_pinjam'] . "' class='btn btn-warning btn-small' style='color: black;'>Batalkan</a>"; ?>
                       <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
