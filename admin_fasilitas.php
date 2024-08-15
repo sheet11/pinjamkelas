@@ -173,7 +173,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                 <td><?php echo $d['nama_ruang']; ?></td>
                 <td><?php echo $d['gedung']; ?></td>
                 <td><?php echo $d['lantai'] ?></td>
-                <td><?php echo $d['status']; ?></td>
+                <td><?php echo $d['status_pinjam']; ?></td>
                 <td><?php echo "<a href='#myModal' class='btn btn-default btn-small' id='custId' data-toggle='modal' data-id=" . $d['id_ruang'] . ">Edit</a>"; ?></td>
               </tr>
             <?php

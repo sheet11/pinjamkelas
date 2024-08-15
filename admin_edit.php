@@ -26,10 +26,19 @@ if ($_POST['rowid']) {
                 <input type="text" class="form-control" id="lantai" name="lantai" value="<?php echo $baris['lantai']; ?>" required>
             </div>
 
-            <!--<div class="form-group">
-                <label for="ruangan">Status: </label>             
-			    <input type="text" class="form-control" id="status" name="status" value="<?php echo $baris['status']; ?>" required> 
-            </div>-->
+            <div class="form-group">
+                <label for="ruangan">Status: </label>
+                <select name="status" id="status" class="form-control">
+                    <option disabled selected value value="">Pilih Status</option>
+                    <option <?php if ($status == 'Tersedia') {
+                                echo 'selected';
+                            } ?> value="Tersedia">Tersedia</option>
+                    <option <?php if ($status == 'Sedang di pinjam') {
+                                echo 'selected';
+                            } ?> value="Sedang di pinjam">Sedang di pinjam</option>
+                </select>
+
+            </div>
 
             <button class="btn btnact container2" id="submit" name="submit" type="submit">Update</button><br>
 

@@ -124,6 +124,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       if (isset($_GET['proses'])) {
         $kp = $_GET['kode_pinjam'];
         $st = $_GET['status'];
+        $nr = $_GET['nama_ruang'];
 
         switch ($st) {
           case '1':
@@ -135,15 +136,19 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
             $status = 'Selesai';
             $color = '#0000FF';
             $sp = 'Tersedia';
+            $sr = '';
             break;
           case '3':
             $status = 'Batal';
             $color = '#000';
             $sp = 'Tersedia';
+            $sr = '';
             break;
         }
 
-        mysqli_query($koneksi, "UPDATE meminjam set status='$status',color='$color' where kode_pinjam='$kp'");
+        mysqli_query($koneksi, "UPDATE meminjam set nama_ruang='$sr', status='$status',color='$color' where kode_pinjam='$kp'");
+        mysqli_query($koneksi, "UPDATE ruangan set status_pinjam='$sp' where nama_ruang='$nr'");
+
       ?>
         <script type="text/javascript">
           alert('Peminjaman telah diperbarui menjadi : <?= $status; ?>');
@@ -181,7 +186,8 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
               include 'koneksi.php';
 
               $data = mysqli_query($koneksi, "select * from meminjam order by kode_pinjam desc");
-              $r = mysqli_query($koneksi, "select * from ruangan order by nama_ruang desc");
+              $ruan = mysqli_query($koneksi, "select * from ruangan order by nama_ruang desc");
+              $r = mysqli_fetch_array($ruan);
               while ($d = mysqli_fetch_array($data)) {
               ?>
                 <tr>
@@ -198,9 +204,16 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                         echo "<span class='badge kuning'>Diajukan</span>";
                       } elseif ($d['status'] == 'Batal') {
                         echo "<span class='badge merah'>Batal</span>";
+                        //mysqli_query($koneksi, "UPDATE ruangan SET status_pinjam='Tersedia' WHERE nama_ruang='$d[nama_ruang]'");
                       } else {
                         echo "<span class='badge biru'>Selesai</span>";
+                        //mysqli_query($koneksi, "UPDATE ruangan SET status_pinjam='Tersedia' WHERE nama_ruang='$d[nama_ruang]'");
                       } ?></td>
+                  <!-- <?php if ($d['status'] == 'Batal' || $d['status'] == 'Selesaikan') {
+                          mysqli_query($koneksi, "UPDATE ruangan SET status_pinjam='Tersedia' WHERE nama_ruang='$d[nama_ruang]'");
+                        } else {
+                          echo 'asdasd';
+                        } ?> -->
                   <?php
                   if ($d['status'] == 'Diajukan') {
                   ?>
@@ -211,8 +224,8 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                   <?php
                   } elseif ($d['status'] == 'Disetujui') {
                   ?>
-                    <td><?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=2' class='btn btn-primary btn-small'>Selesaikan<br></a>"; ?>
-                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3&nama_ruang=" . $d['kode_pinjam'] . "' class='btn btn-warning btn-small' style='color: black;'>Batalkan</a>"; ?>
+                    <td><?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=2&nama_ruang=" . $d['nama_ruang'] . "' class='btn btn-primary btn-small'>Selesaikan<br></a>"; ?>
+                      <?php echo "<a href='admin_pengajuan.php?proses&kode_pinjam=" . $d['kode_pinjam'] . "&status=3&nama_ruang=" . $d['nama_ruang'] . "' class='btn btn-warning btn-small' style='color: black;'>Batalkan</a>"; ?>
                       <?php echo "<a href='admin_edit_pengajuan.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-primary btn-small'>Edit</a>"; ?>
                       <?php echo "<a href='delete.php?kode_pinjam=" . $d['kode_pinjam'] . "' class='btn btn-danger btn-small'>Hapus</a>"; ?></td>
                   <?php
