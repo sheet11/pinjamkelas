@@ -54,7 +54,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
         <a href="./menu_mahasiswa.php"><button class="btn backbutton1"><span class="glyphicon glyphicon-menu-left"></span> Kembali</button></a>
       </div>
       <?php
-      if (isset($_GET['proses'])) {
+      if (isset($_GET['pengajuan'])) {
         $kp = $_GET['kode_pinjam'];
         $st = $_GET['status'];
 
@@ -73,15 +73,25 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
             break;
         }
 
-        mysqli_query($koneksi, "UPDATE meminjam set status='$status',color='$color' where kode_pinjam='$kp'");
+        mysqli_query($koneksi, "UPDATE meminjam set nama_ruang='$sr', status='$status',color='$color' where kode_pinjam='$kp'");
+        mysqli_query($koneksi, "UPDATE ruangan set status_pinjam='$sp' where nama_ruang='$nr'");
       ?>
         <script type="text/javascript">
           alert('Peminjaman telah diperbarui menjadi : <?= $status; ?>');
           header("location:admin_pengajuan.php");
         </script>
       <?php
-      }
-      ?>
+  include "koneksi.php";
+  $nama = $_SESSION['nama'];
+  $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' || status='Disetujui'");
+  $r = mysqli_fetch_array($dat);
+
+  if ($data = true) { ?>
+    <div class="text-center">
+      <h3 class="text-center">Peminjaman sudah di ajukan silahkan cek menu pengajuan </h3>
+      <a href="./mahasiswa_pengajuan.php"><button class="btn btn-primary">Pengajuan</button></a>
+    </div>
+  <?php } else { } ?>
     </div>
     <br><br>
     <div class="row content">
@@ -89,47 +99,66 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <div class="col-sm-10">
         <div class="table-responsive">
           <table class="table" style="width:100%">
-            <thead>
 
-              <?php
-              include 'koneksi.php';
-              $data = mysqli_query($koneksi, "select * from meminjam order by kode_pinjam desc");
-              while ($d = mysqli_fetch_array($data)) { ?>
-                <tr>
-                  <th>Nama Peminjam</th>
-                  <td>: <?php echo $d['nama_peminjam']; ?></td>
-                </tr>
-                <tr>
-                  <th>Nama Ruang</th>
-                  <td>: <?php echo $d['nama_ruang']; ?></td>
-                </tr>
-                <tr>
-                  <th>Mata Kuliah</th>
-                  <td>: <?php echo $d['matkul']; ?></td>
-                </tr>
-                <tr>
-                  <th>Dosen</th>
-                  <td>: <?php echo $d['dosen']; ?></td>
-                </tr>
-                <tr>
-                  <th>Waktu Pelaksanaan</th>
-                  <td><?php echo $d['start_date'] ?></td>
-                </tr>
-                <tr>
-                  <th>Waktu Selesai</th>
-                  <td><?php echo $d['end_date']; ?></td>
-                </tr>
-                <tr>
-                  <th>Status</th>
-                  <td><?php echo $d['status']; ?></td>
-                </tr>
-            </thead>
-          <?php } ?>
+            <?php
+            include 'koneksi.php';
 
-          <tbody>
+            $data = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$_SESSION[nama]' AND status='Diajukan' || status='Disetujui'");
+            while ($d = mysqli_fetch_array($data)) { ?>
+              <tr>
+                <th>Nama Peminjam</th>
+                <td>: <?php echo $d['nama_peminjam']; ?></td>
+              </tr>
+
+              <tr>
+                <th>Mata Kuliah</th>
+                <td>: <?php echo $d['matkul']; ?></td>
+              </tr>
+              <tr>
+                <th>Dosen</th>
+                <td>: <?php echo $d['dosen']; ?></td>
+              </tr>
+              <tr>
+                <th>Waktu Pelaksanaan</th>
+                <td>: <?php echo $d['start_date'] ?></td>
+              </tr>
+              <tr>
+                <th>Waktu Selesai</th>
+                <td>: <?php echo $d['end_date']; ?></td>
+              </tr>
+              <tr>
+                <th></th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Ruang yang di Acc</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Nama Ruang</th>
+                <td>: <?php echo $d['nama_ruang']; ?></td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td>: <?php if ($d['status'] == 'Disetujui') {
+                        echo "<span class='badge hijau'>Disetujui</span>";
+                      } elseif ($d['status'] == 'Diajukan') {
+                        echo "<span class='badge kuning'>Diajukan</span>";
+                      } elseif ($d['status'] == 'Batal') {
+                        echo "<span class='badge merah'>Batal</span>";
+                      } else {
+                        echo "<span class='badge biru'>Selesai</span>";
+                      } ?></td>
+              </tr>
+              <tr>
+                <!-- <th><a href="mahasiswa_pengajuan.php?pengajuan&kode_pinjam=<?php echo $d['kode_pinjam'] ?>"><button class="btn btn-success"> Selesaikan </button></a></th> -->
+              </tr>
+            <?php } ?>
+
+            <tbody>
 
 
-          </tbody>
+            </tbody>
           </table>
           <!-- <script type="text/javascript">
       $(document).ready(function () {
@@ -141,11 +170,11 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <div class="col-sm-1"></div>
     </div>
 
-    <div class="row content">
+    <!-- <div class="row content">
       <div class="col-md-3"></div>
       <div class="col-md-6 text-center"><a target="_blank" href="export_excel.php" class="btn btn-success">EXPORT KE EXCEL</a></div>
       <div class="col-md-3"></div>
-    </div>
+    </div> -->
   </div>
 </body>
 
@@ -162,7 +191,38 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
     width: 20%;
   }
 
+  .thead {
+    background-color: white;
+  }
+
   table {
-    border: none;
+    border-collapse: collapse;
+    background-color: white;
+  }
+
+  .but {
+    border-spacing: 5px;
+    margin-top: 5px;
+    padding-right: 24.5px;
+  }
+
+  .merah {
+    background-color: red;
+  }
+
+  .biru {
+    background-color: blue;
+  }
+
+  .kuning {
+    background-color: orange;
+  }
+
+  .hijau {
+    background-color: green;
+  }
+
+  .btn {
+    border-radius: 4px;
   }
 </style>

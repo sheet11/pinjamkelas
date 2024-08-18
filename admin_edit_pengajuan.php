@@ -171,12 +171,12 @@ while ($a = mysqli_fetch_array($data)) {
 
         <div class="form-group">
           <label>Status Peminjaman</label>
-          <div class='input-group'>
+          <div class=''>
             <select class="form-control" name="status">
               <option>---Pilih---</option>
-              <option <?php if ($status == 'Disetujui') {
-                        echo 'selected';
-                      } ?> value="Disetujui">Disetujui</option>
+              <!-- <option <?php if ($status == 'Disetujui') {
+                              echo 'selected';
+                            } ?> value="Disetujui">Disetujui</option> -->
               <option <?php if ($status == 'Diajukan') {
                         echo 'selected';
                       } ?> value="Diajukan">Diajukan</option>
