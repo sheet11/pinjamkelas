@@ -123,7 +123,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
               <?php
               include 'koneksi.php';
 
-              $data = mysqli_query($koneksi, "select * from meminjam order by kode_pinjam desc");
+              $data = mysqli_query($koneksi, "select * from meminjam where status='Selesai' || status='ditolak' order by kode_pinjam desc");
               while ($d = mysqli_fetch_array($data)) {
               ?>
                 <tr>

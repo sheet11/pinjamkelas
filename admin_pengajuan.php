@@ -139,7 +139,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
             $sr = '';
             break;
           case '3':
-            $status = 'Batal';
+            $status = 'ditolak';
             $color = '#000';
             $sp = 'Tersedia';
             $sr = '';

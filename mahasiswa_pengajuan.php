@@ -56,42 +56,35 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <?php
       if (isset($_GET['pengajuan'])) {
         $kp = $_GET['kode_pinjam'];
-        $st = $_GET['status'];
+        $sr = $_GET['nama_ruang'];
+        $st = 'Selesai';
+        $sp = 'Tersedia';
 
-        switch ($st) {
-          case '1':
-            $status = 'Disetujui';
-            $color = '#FF0000';
-            break;
-          case '2':
-            $status = 'Selesai';
-            $color = '#0000FF';
-            break;
-          case '3':
-            $status = 'Batal';
-            $color = '#000000';
-            break;
-        }
-
-        mysqli_query($koneksi, "UPDATE meminjam set nama_ruang='$sr', status='$status',color='$color' where kode_pinjam='$kp'");
-        mysqli_query($koneksi, "UPDATE ruangan set status_pinjam='$sp' where nama_ruang='$nr'");
+        mysqli_query($koneksi, "UPDATE meminjam set nama_ruang='$sr', status='$st' where kode_pinjam='$kp'");
+        mysqli_query($koneksi, "UPDATE ruangan set status_pinjam='$sp' where nama_ruang='$sr'");
       ?>
         <script type="text/javascript">
           alert('Peminjaman telah diperbarui menjadi : <?= $status; ?>');
-          header("location:admin_pengajuan.php");
+          header("location:mahasiswa_pengajuan.php");
         </script>
-      <?php
-  include "koneksi.php";
-  $nama = $_SESSION['nama'];
-  $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' || status='Disetujui'");
-  $r = mysqli_fetch_array($dat);
+      <?php } ?>
+      <?php 
+        include "koneksi.php";
+        $nama = $_SESSION['nama'];
+        $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' || status='Disetujui'");
+        $r = mysqli_fetch_array($dat);
 
-  if ($data = true) { ?>
-    <div class="text-center">
-      <h3 class="text-center">Peminjaman sudah di ajukan silahkan cek menu pengajuan </h3>
-      <a href="./mahasiswa_pengajuan.php"><button class="btn btn-primary">Pengajuan</button></a>
-    </div>
-  <?php } else { } ?>
+        if ($r['status'] == 'Ditolak' || $r['status'] == 'Selesai') { ?>
+        <div class="text-center">
+            <h3 class="text-center">Peminjaman sudah selesai atau peminjaman di tolak, silahkan cek pengajuan terdahulu di riwayat peminjaman </h3>
+            <a href="./riwayat_peminjaman.php"><button class="btn btn-primary">Riwayat peminjaman</button></a>
+        </div>
+        <div class="text-center">
+            <h3 class="text-center">Peminjaman belum di ajukan silahkan ajukan terlebih dahulu </h3>
+            <a href="./mahasiswa_pengajuan.php"><button class="btn btn-primary">Peminjaman</button></a>
+        </div>
+          
+        <?php } else { ?>
     </div>
     <br><br>
     <div class="row content">
@@ -150,14 +143,13 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                         echo "<span class='badge biru'>Selesai</span>";
                       } ?></td>
               </tr>
-              <tr>
-                <!-- <th><a href="mahasiswa_pengajuan.php?pengajuan&kode_pinjam=<?php echo $d['kode_pinjam'] ?>"><button class="btn btn-success"> Selesaikan </button></a></th> -->
-              </tr>
+              <?php if ($d['nama_ruang'] == !null) { ?>
+                <tr>
+                  <th><a href="mahasiswa_pengajuan.php?pengajuan&kode_pinjam=<?php echo $d['kode_pinjam'] ?>&nama_ruang=<?php echo $d['nama_ruang'] ?>"><button onclick="return confirm('Anda yakin ingin menyelesaikan peminjaman?');" class="btn btn-success"> Selesaikan </button></a></th>
+                </tr>                
+              <?php }else{} ?>
             <?php } ?>
-
             <tbody>
-
-
             </tbody>
           </table>
           <!-- <script type="text/javascript">
@@ -169,7 +161,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       </div>
       <div class="col-sm-1"></div>
     </div>
-
+    <?php } ?>                 
     <!-- <div class="row content">
       <div class="col-md-3"></div>
       <div class="col-md-6 text-center"><a target="_blank" href="export_excel.php" class="btn btn-success">EXPORT KE EXCEL</a></div>
@@ -179,6 +171,18 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
 </body>
 
 </html>
+
+<script>
+  // function tombol() {
+  //   let text = 'Apakah anda yakin ingin menyelesaikan peminjaman?';
+  //   if (confirm(text) == true){
+  //     text = '';
+  //   }else{
+  //     text = '';
+  //   }
+  //   document.getElementById("demo").innerHTML = text;
+  // }
+</script>
 
 <style type="text/css">
   .but {
