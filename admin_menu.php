@@ -60,7 +60,9 @@
 
   <a href="admin_fasilitas.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-tower"></span><br>Fasilitas</a>
   <a href="./admin_pengajuan.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-folder-open"></span><br>Pengajuan</a>
-  <a href="admin_jadwal.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-calendar"></span><br>Jadwal</a>
+  <a href="./admin_user.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-folder-open"></span><br>User</a>
+
+  <!-- <a href="admin_jadwal.php" class="btn btn-lg"><span class="badge"></span><br><span class="glyphicon glyphicon-calendar"></span><br>Jadwal</a> -->
 </div>
 </body>
 </html>

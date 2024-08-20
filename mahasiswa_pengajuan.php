@@ -71,17 +71,18 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <?php 
         include "koneksi.php";
         $nama = $_SESSION['nama'];
-        $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' || status='Disetujui'");
+        $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' OR status='Disetujui'");
         $r = mysqli_fetch_array($dat);
 
-        if ($r['status'] == 'Ditolak' || $r['status'] == 'Selesai') { ?>
-        <div class="text-center">
-            <h3 class="text-center">Peminjaman sudah selesai atau peminjaman di tolak, silahkan cek pengajuan terdahulu di riwayat peminjaman </h3>
+        if ($r == null) { ?>
+        <!-- <?php var_dump($r) ?> -->
+        <div class="text-center" style="margin-top: 155px;">
+            <h3 class="">Peminjaman sudah selesai atau peminjaman di tolak, silahkan cek pengajuan sebelumnya di riwayat peminjaman </h3>
             <a href="./riwayat_peminjaman.php"><button class="btn btn-primary">Riwayat peminjaman</button></a>
         </div>
         <div class="text-center">
-            <h3 class="text-center">Peminjaman belum di ajukan silahkan ajukan terlebih dahulu </h3>
-            <a href="./mahasiswa_pengajuan.php"><button class="btn btn-primary">Peminjaman</button></a>
+            <h3 class="text-center">Jika peminjaman belum di ajukan silahkan ajukan terlebih dahulu </h3>
+            <a href="./user_peminjaman_ruangan.php"><button class="btn btn-primary">Peminjaman</button></a>
         </div>
           
         <?php } else { ?>

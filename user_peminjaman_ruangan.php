@@ -77,16 +77,16 @@
   <?php
   include "koneksi.php";
   $nama = $_SESSION['nama'];
-  $data = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' || status='Disetujui'");
+  $data = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' OR status='Disetujui'");
   $d = mysqli_fetch_array($data);
 
-  if ($data = true) { ?>
+  if ($d = null) { ?>
     <div class="text-center">
       <h3 class="text-center">Peminjaman sudah di ajukan silahkan cek menu pengajuan </h3>
       <a href="./mahasiswa_pengajuan.php"><button class="btn btn-primary">Pengajuan</button></a>
     </div>
   <?php } else {
-    echo $d['status']; ?>
+    // echo $d['status']; ?>
     <div class="col-md-12 daftar">
       <div class="col-sm-3"></div>
       <div class="col-md-6 form">

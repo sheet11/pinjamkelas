@@ -74,7 +74,8 @@
     ?>
   </div>
 
-
+    <br>
+    <br>
   <div class="row content">
     <div class="col-sm-1"></div>
       <div class="col-sm-10">
@@ -83,9 +84,9 @@
             <thead class="text-center">
               <tr>
                 <th>Nama Peminjam</th>
-                <th>Instansi</th>
+                <th>Mata Kuliah</th>
+                <th>Dosen</th>
                 <th>Nama Ruang</th>
-                <th>Kegiatan</th>
                 <th>Waktu Pelaksanaan</th>
                 <th>Waktu Selesai</th>
                 <th>Status</th>
@@ -99,14 +100,14 @@
     <?php 
 		include 'koneksi.php';
     
-		$data = mysqli_query($koneksi,"select * from meminjam order by start_date desc");
+		$data = mysqli_query($koneksi,"select * from meminjam where status='Disetujui' order by start_date desc");
 		while($d = mysqli_fetch_array($data)){
 			?>
 			<tr>
 				<td><?php echo $d['nama_peminjam']; ?></td>
-        <td><?php echo $d['instansi_peminjam']; ?></td>
+        <td><?php echo $d['matkul']; ?></td>
+        <td><?php echo $d['dosen']; ?></td>
 				<td><?php echo $d['nama_ruang']; ?></td>
-        <td><?php echo $d['nama_kegiatan']; ?></td>
         <td><?php echo $d['start_date'] ?></td>
 				<td><?php echo $d['end_date']; ?></td>
         <td>
@@ -131,7 +132,6 @@
     <script type="text/javascript">
       $(document).ready(function () {
     $('#pengajuan').DataTable();
-    "ordering": false
 });
     </script>
     </div>
