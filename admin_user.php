@@ -207,11 +207,11 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
     </div>
   </div>
 
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="buatModal" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Ruangan</h4>
+          <h4 class="modal-title">Tambah User</h4>
         </div>
 
         <div class="modal-body">
@@ -231,6 +231,20 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
   <script type="text/javascript">
     $(document).ready(function() {
       $('#myModal').on('show.bs.modal', function(e) {
+        var rowid = $(e.relatedTarget).data('id');
+        //menggunakan fungsi ajax untuk pengambilan data
+        $.ajax({
+          type: 'post',
+          url: 'admin_edit_modal.php',
+          data: 'rowid=' + rowid,
+          success: function(data) {
+            $('.fetched-data').html(data); //menampilkan data ke dalam modal
+          }
+        });
+      });
+    });
+    $(document).ready(function() {
+      $('#buatModal').on('show.bs.modal', function(e) {
         var rowid = $(e.relatedTarget).data('id');
         //menggunakan fungsi ajax untuk pengambilan data
         $.ajax({
