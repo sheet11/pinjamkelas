@@ -9,23 +9,25 @@ if ($_POST['rowid']) {
     $sql = "SELECT * FROM user WHERE id_user = $id";
     $result = $koneksi->query($sql);
     foreach ($result as $baris) { ?>
-        <form action="admin_edit_modal_aksi.php" method="post">
+        <form action="admin_user_modal_aksi.php" method="post">
             <div class="form-group">
-                <label for="ruangan">Nama Ruang: </label>
-                <input type="text" class="form-control" id="nama_ruang" name="nama_ruang" value="<?php echo $baris['nama_ruang']; ?>" required>
-                <input type="hidden" id="kode_pinjam" name="kode_pinjam" value="<?php echo $baris['kode_pinjam']; ?>">
+                <label for="nama">Nama: </label>
+                <input type="text" class="form-control" id="nama" name="nama" required>
+            </div>
+
+            <div class="nama-group">
+                <label for="username">Username: </label>
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
 
             <div class="form-group">
-                <label>Nama Ruangan</label>
-                <select name="ruang" class="form-control">
-                    <option value="">----PILIH----</option>
-                    <?php
-                    $data_ruang = mysqli_query($koneksi, "SELECT * FROM ruangan");
-                    while ($ruang = mysqli_fetch_array($data_ruang)) { ?>
-                        <option value="<?= $ruang['nama_ruang']; ?>"><?= $ruang['nama_ruang']; ?>, status = <?php echo $ruang['status_pinjam']; ?> </option>
-                    <?php } ?>
-                </select>
+                <label for="telpon">Telpon: </label>
+                <input type="text" class="form-control" id="telpon" name="telpon" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="text" class="form-control" id="password" name="password" required>
             </div>
 
             <!--<div class="form-group">
