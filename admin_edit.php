@@ -29,11 +29,11 @@ if ($_POST['rowid']) {
             <div class="form-group">
                 <label for="ruangan">Status: </label>
                 <select name="status" id="status" class="form-control">
-                    <option disabled selected value value="">Pilih Status</option>
-                    <option <?php if ($status == 'Tersedia') {
+                    <option value="">Pilih Status</option>
+                    <option <?php if ($baris['status_pinjam'] == 'Tersedia') {
                                 echo 'selected';
                             } ?> value="Tersedia">Tersedia</option>
-                    <option <?php if ($status == 'Sedang di pinjam') {
+                    <option <?php if ($baris['status_pinjam'] == 'Sedang di pinjam') {
                                 echo 'selected';
                             } ?> value="Sedang di pinjam">Sedang di pinjam</option>
                 </select>

@@ -163,6 +163,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
     <div class="row content">
       <div class="col-sm-1"></div>
       <div class="col-sm-10">
+      <a href='#buatModal' id='custId' data-toggle='modal'><button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Tambah data</button></a>
         <div class="table-responsive">
           <table class="table table-bordered table-hover" id="pengajuan">
             <thead class="text-center">
@@ -172,6 +173,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                 <th>Nomor Telepon</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Aksi</th>
               </tr>
             </thead>
 
@@ -212,8 +214,36 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Tambah User</h4>
-        </div>
+        </div>        
+        <form action="admin_user_modal_aksi.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nama">Nama: </label>
+                <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off">
+            </div>
 
+            <div class="form-group">
+                <label for="username">Username: </label>
+                <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="telpon">Telpon: </label>
+                <input type="text" class="form-control" id="telpon" name="telpon" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="text" class="form-control" id="password" name="password" required>
+            </div>
+
+            <!--<div class="form-group">
+                <label for="ruangan">Status: </label>             
+			    <input type="text" class="form-control" id="status" name="status" value="<?php echo $baris['status']; ?>" required> 
+            </div>-->
+
+            <button class="btn btnact container2" id="submit" name="submit" type="submit">Update</button><br>
+
+        </form>
         <div class="modal-body">
           <div class="fetched-data"></div>
         </div>
@@ -231,20 +261,6 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
   <script type="text/javascript">
     $(document).ready(function() {
       $('#myModal').on('show.bs.modal', function(e) {
-        var rowid = $(e.relatedTarget).data('id');
-        //menggunakan fungsi ajax untuk pengambilan data
-        $.ajax({
-          type: 'post',
-          url: 'admin_edit_modal.php',
-          data: 'rowid=' + rowid,
-          success: function(data) {
-            $('.fetched-data').html(data); //menampilkan data ke dalam modal
-          }
-        });
-      });
-    });
-    $(document).ready(function() {
-      $('#buatModal').on('show.bs.modal', function(e) {
         var rowid = $(e.relatedTarget).data('id');
         //menggunakan fungsi ajax untuk pengambilan data
         $.ajax({
@@ -289,6 +305,14 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
   .btn {
     border-radius: 4px;
   }
+
+  .container2 {
+        width: 100px;
+        height: 5rem;
+        margin: 20px auto;
+        max-width: calc(100% - 20px);
+        padding: 10px;
+    }
 </style>
 
 <!-- <i class='fa fa-print fa-sm'></i> -->
