@@ -26,7 +26,7 @@
 
 
 <body>
-<nav class="navbar">
+<nav class="navbar" >
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="admin_menu.php">Menu Admin</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#" id=''>About</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
