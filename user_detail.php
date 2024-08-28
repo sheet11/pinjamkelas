@@ -108,8 +108,11 @@
         <td><?php echo $d['matkul']; ?></td>
         <td><?php echo $d['dosen']; ?></td>
 				<td><?php echo $d['nama_ruang']; ?></td>
-        <td><?php echo $d['start_date'] ?></td>
-				<td><?php echo $d['end_date']; ?></td>
+        <td><?php
+        $newDate = date("d-m-Y H:i", strtotime($d['start_date']));  
+        echo $newDate ?></td>
+				<td><?php $newDate = date("d-m-Y H:i", strtotime($d['end_date']));  
+        echo $newDate ?></td>
         <td>
           <?php if($d['status'] == 'Disetujui'){
             echo "<span class='badge hijau'>Disetujui</span>";
