@@ -7,7 +7,7 @@ if(isset($_POST['login'])){
 
     require_once "koneksi.php";
 
-    $query = "select * from user where username='$username' and password='$password'";
+    $query = "select * from user where username='$username' and password='$password' and level='mhs'";
     $result = mysqli_query($koneksi, $query) OR die(mysqli_error($koneksi));
     $cek = mysqli_num_rows($result);
 

@@ -118,12 +118,12 @@
 	<h2>Halaman Utama Peminjaman Ruangan</h2><br>
 	<h3>Poltekkes Kemenkes Bengkulu</h3><br><br>
 
-  <a href="./user_jadwal.php" class="btn btn-lg"><span class="glyphicon glyphicon-calendar"></span><br>Kalender</a>
+  <!-- <a href="./user_jadwal.php" class="btn btn-lg"><span class="glyphicon glyphicon-calendar"></span><br>Kalender</a> -->
   <!-- <a href="./user_detail.php" class="btn btn-lg"><span class="glyphicon glyphicon-tower"></span><br>Lihat Peminjaman</a> -->
-  <a href="./login_mahasiswa.php" class="btn btn-lg"><span class="glyphicon glyphicon-earphone"></span><br>Peminjaman</a>
-
+  
 </div> 
 <div class="container-fluid text-center">
+  <a href="./login_mahasiswa.php" class="btn btn-lg"><span class="glyphicon glyphicon-earphone"></span><br>Login Mahasiswa</a>
   <a href="./user_detail.php" class="btn btn-lg"><span class="glyphicon glyphicon-blackboard"></span><br>List Peminjaman</a>
 
 </div> 

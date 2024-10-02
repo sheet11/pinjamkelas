@@ -71,7 +71,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       <?php 
         include "koneksi.php";
         $nama = $_SESSION['nama'];
-        $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND status='Diajukan' OR status='Disetujui'");
+        $dat = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND (status='Diajukan' OR status='Disetujui')");
         $r = mysqli_fetch_array($dat);
 
         if ($r == null) { ?>
@@ -96,8 +96,8 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
 
             <?php
             include 'koneksi.php';
-
-            $data = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$_SESSION[nama]' AND status='Diajukan' || status='Disetujui'");
+            $nama = $_SESSION['nama'];
+            $data = mysqli_query($koneksi, "SELECT * FROM meminjam WHERE nama_peminjam='$nama' AND (status='Diajukan' || status='Disetujui')");
             while ($d = mysqli_fetch_array($data)) { ?>
               <tr>
                 <th>Nama Peminjam</th>

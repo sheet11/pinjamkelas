@@ -177,20 +177,21 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
               </tr>
             </thead>
 
-            <tbody>
-
-              <?php
+            
+            <?php
               include 'koneksi.php';
-
+              
               $data = mysqli_query($koneksi, "select * from user where level='mhs'");
               while ($d = mysqli_fetch_array($data)) {
-              ?>
+                ?>
+                <tbody>
                 <tr>
                   <td><?php echo $d['nama']; ?></td>
                   <td><?php echo $d['telepon']; ?></td>
                   <td><?php echo $d['username']; ?></td>
                   <td><?php echo $d['password']; ?></td>                  
             </tbody>
+            <?php } ?>
           </table>
           <script type="text/javascript">
              $(document).ready(function () {
@@ -201,7 +202,6 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
       </div>
       <div class="col-sm-1"></div>
     </div>
-    <?php } ?>
     <div class="row content">
       <div class="col-md-3"></div>
       <div class="col-md-6 text-center"><a target="_blank" href="export_excel.php" class="btn btn-success">EXPORT KE EXCEL</a></div>
@@ -233,7 +233,7 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
 
             <div class="form-group">
                 <label for="password">Password: </label>
-                <input type="text" class="form-control" id="password" name="password" required>
+                <input type="text" class="form-control" id="password" name="password" autocomplete="off" required>
             </div>
 
             <!--<div class="form-group">

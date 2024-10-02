@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title>Login Gagal | Poltekkes Kemenkes Bengkulu</title>
-  <meta http-equiv="refresh" content="5;url=login.php" />
+  <meta http-equiv="refresh" content="3;url=index.php" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,9 +37,9 @@
 <div class="container-fluid text-center">
 	<br><br><br><br>
 	<h2>Login Gagal</h2><br>
-	<h3>Username atau Password Admin Salah</h3>
-  <h3>Silahkan Login Ulang Menggunakan Username dan Password Admin yang Sesuai</h3><br><br>
-  <h4>Anda akan dialihkan ke halaman login setelah 5 detik</h4>
+	<h3>Username atau Password Salah</h3>
+  <h3>Silahkan Login Ulang Menggunakan Username dan Password yang Sesuai</h3><br><br>
+  <h4>Anda akan dialihkan ke halaman login setelah 3 detik</h4>
 </div>  
 </body>
 </html>

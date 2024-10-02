@@ -173,7 +173,11 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
                 <td><?php echo $d['nama_ruang']; ?></td>
                 <td><?php echo $d['gedung']; ?></td>
                 <td><?php echo $d['lantai'] ?></td>
-                <td><?php echo $d['status_pinjam']; ?></td>
+                <td><?php if ($d['status_pinjam'] == 'Tersedia') {
+                        echo "<span class='badge hijau'>Tersedia</span>";
+                      } elseif ($d['status_pinjam'] == 'Sedang di pinjam') {
+                        echo "<span class='badge merah'>Sedang di pinjam</span>";
+                      } ?></td>
                 <td><?php echo "<a href='#myModal' class='btn btn-default btn-small' id='custId' data-toggle='modal' data-id=" . $d['id_ruang'] . ">Edit</a>"; ?></td>
               </tr>
             <?php
@@ -232,8 +236,55 @@ if (empty($_SESSION['username'] && $_SESSION['password'])) {
 
 </html>
 
-<style>
+
+ <style type="text/css">
   .kecil {
     width: 30px;
+  }
+
+
+  .but {
+    border-spacing: 5px;
+    margin-top: 5px;
+    padding-right: 24.5px;
+  }
+
+  th {
+    width: 20%;
+  }
+
+  .thead {
+    background-color: white;
+  }
+
+  table {
+    border-collapse: collapse;
+    background-color: white;
+  }
+
+  .but {
+    border-spacing: 5px;
+    margin-top: 5px;
+    padding-right: 24.5px;
+  }
+
+  .merah {
+    background-color: red;
+  }
+
+  .biru {
+    background-color: blue;
+  }
+
+  .kuning {
+    background-color: orange;
+  }
+
+  .hijau {
+    background-color: green;
+  }
+
+  .btn {
+    border-radius: 4px;
   }
 </style>
